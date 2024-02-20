@@ -4,6 +4,7 @@ import {
   useContext,
   useMemo,
   useState,
+  ReactNode,
 } from 'react';
 
 import { ITodo } from '../entities/ITodo';
@@ -25,14 +26,14 @@ export function useGlobal() {
   return useContext(GlobalContext);
 }
 
-export function GlobalProvider({ children }: { children: React.ReactNode }) {
+export function GlobalProvider({ children }: { children: ReactNode }) {
   const [loggedUser, setLoggedUser] = useState<IUser | null>(null);
   const [todos, setTodos] = useState<ITodo[]>([]);
 
   const login = useCallback(() => {
     setLoggedUser({
-      email: 'mateus@jstack.com.br',
-      name: 'Mateus Silva',
+      email: 'gabriel.ferreira.itba@gmail.com',
+      name: 'Gabriel Ferreira',
     });
   }, []);
 

@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, FormEvent } from 'react';
 
 import { useGlobal } from '../contexts/GlobalContext';
 import { useRenderCounter } from '../hooks/useRenderCounter';
@@ -9,7 +9,7 @@ export function TodoForm() {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const { addTodo } = useGlobal();
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     if (inputRef.current?.value) {

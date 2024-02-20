@@ -1,12 +1,24 @@
 import { LogOutIcon, UserIcon } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
-import { useGlobal } from '../contexts/GlobalContext';
 import { useRenderCounter } from '../hooks/useRenderCounter';
+import { globalStore } from '../store/globalStore';
 
 export function UserMenu() {
   useRenderCounter('UserMenu');
 
-  const { user, login, logout } = useGlobal();
+  const [user, setUser] = useState(globalStore.getState().user);
+
+  const { login } = globalStore.getState();
+  const { logout } = globalStore.getState();
+
+  useEffect(() => {
+    const unsubscribe = globalStore.subscribe(() => {
+      setUser(globalStore.getState().user);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   if (!user) {
     return (
@@ -23,7 +35,7 @@ export function UserMenu() {
   return (
     <div className="flex items-center gap-4">
       <div className="flex flex-col items-end gap-1 text-right">
-        <span className="block text-sm text-zinc-500">Olá, {user.name}!</span>
+        <span className="block text-sm text-zinc-500">Olá, {user?.name}!</span>
         <button
           type="button"
           className="flex items-center gap-1.5 text-sm text-red-500 transition-colors hover:text-red-400"

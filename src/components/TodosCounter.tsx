@@ -1,12 +1,12 @@
 import { CircleOffIcon, LayoutListIcon } from 'lucide-react';
 
-import { useGlobal } from '../contexts/GlobalContext';
+import { useGlobalStore } from '../hooks/useGlobalStore';
 import { useRenderCounter } from '../hooks/useRenderCounter';
 
 export function TodosCounter() {
   useRenderCounter('TodosCounter');
 
-  const { todos } = useGlobal();
+  const todos = useGlobalStore((state) => state.todos);
   const totalTodos = todos.length;
 
   return (
